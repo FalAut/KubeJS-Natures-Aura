@@ -19,7 +19,7 @@ public class KubeJSNaturesAuraPlugin extends KubeJSPlugin {
         RegistryInfo.ITEM.addType("naturesaura:structure_finder", StructureFinderItemBuilder.class, StructureFinderItemBuilder::new);
     }
     public static EventGroup GROUP = EventGroup.of("NaturesAuraEvents");
-    public static EventHandler AURA_TYPE = GROUP.startup("init", () -> NaturesAuraEventJS.class);
+    public static EventHandler INIT = GROUP.startup("init", () -> NaturesAuraEventJS.class);
 
     @Override
     public void registerEvents() {

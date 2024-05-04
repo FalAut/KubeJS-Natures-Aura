@@ -14,6 +14,6 @@ public class KubeJSNaturesAura {
         MinecraftForge.EVENT_BUS.addListener(KubeJSNaturesAura::gameStart);
     }
     public static void gameStart(ServerStartedEvent event) {
-        KubeJSNaturesAuraPlugin.AURA_TYPE.post(ScriptType.SERVER, NaturesAuraEventJS.INSTANCE);
+        KubeJSNaturesAuraPlugin.INIT.post(ScriptType.STARTUP, NaturesAuraEventJS.INSTANCE);
     }
 }
