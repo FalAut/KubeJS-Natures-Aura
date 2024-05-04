@@ -8,7 +8,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 
 public class StructureFinderItemBuilder extends ItemBuilder {
-//    private String baseName;
+    //    private String baseName;
     private ResourceLocation structure;
     private int color;
     private int radius;
