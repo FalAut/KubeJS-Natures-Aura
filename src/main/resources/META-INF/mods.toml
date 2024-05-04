@@ -1,5 +1,5 @@
 modLoader = "javafml"
-loaderVersion = "[2,)"
+loaderVersion = "[47,)"
 issueTrackerURL="https://github.com/FalAut/KubeJS-Natures-Aura/issues"
 license = "MIT"
 
@@ -14,22 +14,29 @@ KubeJS Nature's Aura
 '''
 
 [[dependencies.kubejs_naturesaura]]
-modId = "neoforge"
-type = "required"
-versionRange = "[20.4,)"
+modId = "forge"
+mandatory = true
+versionRange = "[47,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.kubejs_naturesaura]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.20.1,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.kubejs_naturesaura]]
 modId = "kubejs"
-type = "required"
-versionRange = "[2004.7,)"
+mandatory = true
+versionRange = "[2001.6.4,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.kubejs_naturesaura]]
 modId = "naturesaura"
 mandatory = true
-versionRange = "[40.1,)"
+versionRange = "[39.4,)"
 ordering = "NONE"
 side = "BOTH"
