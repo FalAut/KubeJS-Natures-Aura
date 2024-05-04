@@ -59,7 +59,7 @@ dependencies {
     modRuntimeOnly("dev.architectury:architectury-forge:${arch_ver}")
 
     /* NaturesAura Dependencies */
-    implementation("curse.maven:NaturesAura-306626:4963590")
+    implementation("curse.maven:NaturesAura-306626:4613484")
 }
 
 processResources {

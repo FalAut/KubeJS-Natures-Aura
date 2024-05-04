@@ -2,7 +2,7 @@ package com.falaut.custom;
 
 import de.ellpeck.naturesaura.items.ItemStructureFinder;
 import dev.latvian.mods.kubejs.item.ItemBuilder;
-import net.minecraft.core.registries.Registries;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -39,6 +39,6 @@ public class StructureFinderItemBuilder extends ItemBuilder {
 
     @Override
     public Item createObject() {
-        return new ItemStructureFinder(this.id.getPath(), ResourceKey.create(Registries.STRUCTURE, structure), color, radius);
+        return new ItemStructureFinder(this.id.getPath(), ResourceKey.create(Registry.STRUCTURE_REGISTRY, structure), color, radius);
     }
 }
