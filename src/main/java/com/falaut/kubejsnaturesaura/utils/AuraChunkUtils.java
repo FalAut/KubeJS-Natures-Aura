@@ -1,16 +1,13 @@
-package com.falaut.utils;
+package com.falaut.kubejsnaturesaura.utils;
 
 
 import de.ellpeck.naturesaura.api.NaturesAuraAPI;
 import de.ellpeck.naturesaura.api.aura.chunk.IAuraChunk;
 import de.ellpeck.naturesaura.api.aura.type.IAuraType;
-import dev.latvian.mods.rhino.ast.Block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.level.Level;
 import org.apache.commons.lang3.tuple.Pair;
-
-import java.util.function.BiConsumer;
 
 public class AuraChunkUtils {
     int DEFAULT_AURA = 1000000;

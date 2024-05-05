@@ -1,4 +1,4 @@
-package com.falaut.custom;
+package com.falaut.kubejsnaturesaura.custom;
 
 import de.ellpeck.naturesaura.items.ItemStructureFinder;
 import dev.latvian.mods.kubejs.item.ItemBuilder;
