@@ -1,4 +1,4 @@
-package com.falaut.utils;
+package com.falaut.kubejsnaturesaura.utils;
 
 import de.ellpeck.naturesaura.api.NaturesAuraAPI;
 import de.ellpeck.naturesaura.api.aura.type.IAuraType;

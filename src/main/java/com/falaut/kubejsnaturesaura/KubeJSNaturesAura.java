@@ -1,6 +1,6 @@
-package com.falaut;
+package com.falaut.kubejsnaturesaura;
 
-import com.falaut.event.NaturesAuraEventJS;
+import com.falaut.kubejsnaturesaura.event.NaturesAuraEventJS;
 import dev.latvian.mods.kubejs.script.ScriptType;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.server.ServerStartedEvent;

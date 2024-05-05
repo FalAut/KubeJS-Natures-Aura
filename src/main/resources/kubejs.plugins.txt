@@ -1,1 +1,1 @@
-com.falaut.KubeJSNaturesAuraPlugin
+com.falaut.kubejsnaturesaura.KubeJSNaturesAuraPlugin

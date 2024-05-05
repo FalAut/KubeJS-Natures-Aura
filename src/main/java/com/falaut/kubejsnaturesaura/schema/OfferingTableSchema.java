@@ -1,4 +1,4 @@
-package com.falaut.schema;
+package com.falaut.kubejsnaturesaura.schema;
 
 import dev.latvian.mods.kubejs.recipe.RecipeKey;
 import dev.latvian.mods.kubejs.recipe.component.ItemComponents;
