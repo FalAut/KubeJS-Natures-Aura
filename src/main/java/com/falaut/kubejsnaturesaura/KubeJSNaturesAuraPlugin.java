@@ -1,8 +1,8 @@
-package com.falaut;
+package com.falaut.kubejsnaturesaura;
 
-import com.falaut.custom.*;
-import com.falaut.schema.*;
-import com.falaut.event.NaturesAuraEventJS;
+import com.falaut.kubejsnaturesaura.custom.*;
+import com.falaut.kubejsnaturesaura.schema.*;
+import com.falaut.kubejsnaturesaura.event.NaturesAuraEventJS;
 import dev.latvian.mods.kubejs.KubeJSPlugin;
 import dev.latvian.mods.kubejs.event.EventGroup;
 import dev.latvian.mods.kubejs.event.EventHandler;
