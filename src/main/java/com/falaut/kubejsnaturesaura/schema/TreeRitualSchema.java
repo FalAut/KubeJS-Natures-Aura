@@ -1,17 +1,21 @@
 package com.falaut.kubejsnaturesaura.schema;
 
-import dev.latvian.mods.kubejs.item.InputItem;
 import dev.latvian.mods.kubejs.recipe.RecipeKey;
-import dev.latvian.mods.kubejs.recipe.component.ItemComponents;
-import dev.latvian.mods.kubejs.recipe.component.TimeComponent;
+import dev.latvian.mods.kubejs.recipe.component.*;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchema;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.neoforge.common.crafting.SizedIngredient;
+
+import java.util.List;
 
 public interface TreeRitualSchema {
 
-    RecipeKey<?> OUTPUT = ItemComponents.OUTPUT.key("output");
-    RecipeKey<?> INGREDIENTS = ItemComponents.INPUT_ARRAY.key("ingredients");
-    RecipeKey<?> SAPLING = ItemComponents.INPUT.key("sapling").optional(InputItem.of("oak_sapling")).alwaysWrite();
-    RecipeKey<?> TIME = TimeComponent.TICKS.key("time").optional(200L).alwaysWrite();
+    RecipeKey<ItemStack> OUTPUT =  ItemStackComponent.ITEM_STACK.outputKey("output");
+    RecipeKey<List<Ingredient>> INGREDIENTS = IngredientComponent.INGREDIENT.asList().inputKey("ingredients");
+    RecipeKey<Ingredient> SAPLING = IngredientComponent.INGREDIENT.inputKey("sapling").optional(Ingredient.of(Items.OAK_SAPLING)).alwaysWrite();
+    RecipeKey<Integer> TIME = NumberComponent.INT.key("time",ComponentRole.OTHER).optional(200).alwaysWrite();
 
     RecipeSchema SCHEMA = new RecipeSchema(OUTPUT, INGREDIENTS, SAPLING, TIME);
 }

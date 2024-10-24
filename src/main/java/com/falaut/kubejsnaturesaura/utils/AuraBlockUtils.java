@@ -1,61 +1,58 @@
 package com.falaut.kubejsnaturesaura.utils;
 
 import de.ellpeck.naturesaura.api.NaturesAuraAPI;
+import de.ellpeck.naturesaura.api.aura.container.IAuraContainer;
 import de.ellpeck.naturesaura.api.aura.type.IAuraType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.entity.BlockEntity;
 
 public class AuraBlockUtils {
-    public Number getStoredAura(BlockEntity blockEntity) {
+
+    private IAuraContainer getAuraContainer(BlockEntity blockEntity) {
         if (blockEntity == null) return null;
-        var cap = blockEntity.getCapability(NaturesAuraAPI.CAP_AURA_CONTAINER);
-        if (cap.isPresent()) {
-            return cap.resolve().get().getStoredAura();
-        }
-        return null;
+        var level = blockEntity.getLevel();
+        var pos = blockEntity.getBlockPos();
+        var tile = level.getBlockEntity(pos);
+        return level.getCapability(NaturesAuraAPI.AURA_CONTAINER_BLOCK_CAPABILITY, tile.getBlockPos(), tile.getBlockState(), tile, null);
+    }
+
+    public Number getStoredAura(BlockEntity blockEntity) {
+        var cap = getAuraContainer(blockEntity);
+        return cap != null ? cap.getStoredAura() : null;
     }
 
     public Number getMaxAura(BlockEntity blockEntity) {
-        if (blockEntity == null) return null;
-        var cap = blockEntity.getCapability(NaturesAuraAPI.CAP_AURA_CONTAINER);
-        if (cap.isPresent()) {
-            return cap.resolve().get().getStoredAura();
-        }
-        return null;
+        var cap = getAuraContainer(blockEntity);
+        return cap != null ? cap.getMaxAura() : null;
     }
 
     public Number getAuraColor(BlockEntity blockEntity) {
-        if (blockEntity == null) return null;
-        var cap = blockEntity.getCapability(NaturesAuraAPI.CAP_AURA_CONTAINER);
-        if (cap.isPresent()) {
-            return cap.resolve().get().getAuraColor();
-        }
-        return null;
+        var cap = getAuraContainer(blockEntity);
+        return cap != null ? cap.getAuraColor() : null;
     }
 
     public Boolean isAcceptableType(BlockEntity blockEntity, String auraType) {
-        if (blockEntity == null) return null;
-        var cap = blockEntity.getCapability(NaturesAuraAPI.CAP_AURA_CONTAINER);
-        IAuraType IAuraType =  NaturesAuraAPI.AURA_TYPES.get(new ResourceLocation(auraType));
-        if (cap.isPresent() && IAuraType != null) {
-            return cap.resolve().get().isAcceptableType(IAuraType);
+        var cap = getAuraContainer(blockEntity);
+        if (cap != null) {
+            IAuraType auraTypeObj = NaturesAuraAPI.AURA_TYPES.get(ResourceLocation.parse(auraType));
+            if (auraTypeObj != null) {
+                return cap.isAcceptableType(auraTypeObj);
+            }
         }
         return null;
     }
 
     public void storeAura(BlockEntity blockEntity, Integer aura, Boolean simulate) {
-        if (blockEntity == null) return;
-        var cap = blockEntity.getCapability(NaturesAuraAPI.CAP_AURA_CONTAINER);
-        if (cap.isPresent()) {
-            cap.resolve().get().storeAura(aura, simulate);
+        var cap = getAuraContainer(blockEntity);
+        if (cap != null) {
+            cap.storeAura(aura, simulate);
         }
     }
 
     public void drainAura(BlockEntity blockEntity, Integer aura, Boolean simulate) {
-        if (blockEntity == null) return;
-        var cap = blockEntity.getCapability(NaturesAuraAPI.CAP_AURA_CONTAINER);
-        if (cap.isPresent()) {
-            cap.resolve().get().drainAura(aura, simulate);
+        var cap = getAuraContainer(blockEntity);
+        if (cap != null) {
+            cap.drainAura(aura, simulate);
         }
     }
 }

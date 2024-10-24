@@ -1,61 +1,57 @@
 package com.falaut.kubejsnaturesaura.utils;
 
 import de.ellpeck.naturesaura.api.NaturesAuraAPI;
+import de.ellpeck.naturesaura.api.aura.container.IAuraContainer;
 import de.ellpeck.naturesaura.api.aura.type.IAuraType;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import org.jetbrains.annotations.Nullable;
 
 public class AuraItemUtils {
-    public Number getStoredAura(ItemStack itemStack) {
+
+    private @Nullable IAuraContainer getAuraContainer(ItemStack itemStack) {
         if (itemStack == null) return null;
-        var cap = itemStack.getCapability(NaturesAuraAPI.CAP_AURA_CONTAINER);
-        if (cap.isPresent()) {
-            return cap.resolve().get().getStoredAura();
-        }
-        return null;
+
+        return itemStack.getCapability(NaturesAuraAPI.AURA_CONTAINER_ITEM_CAPABILITY, null);
+    }
+
+    public Number getStoredAura(ItemStack itemStack) {
+        var cap = getAuraContainer(itemStack);
+        return cap != null ? cap.getStoredAura() : null;
     }
 
     public Number getMaxAura(ItemStack itemStack) {
-        if (itemStack == null) return null;
-        var cap = itemStack.getCapability(NaturesAuraAPI.CAP_AURA_CONTAINER);
-        if (cap.isPresent()) {
-            return cap.resolve().get().getStoredAura();
-        }
-        return null;
+        var cap = getAuraContainer(itemStack);
+        return cap != null ? cap.getMaxAura() : null;
     }
 
     public Number getAuraColor(ItemStack itemStack) {
-        if (itemStack == null) return null;
-        var cap = itemStack.getCapability(NaturesAuraAPI.CAP_AURA_CONTAINER);
-        if (cap.isPresent()) {
-            return cap.resolve().get().getAuraColor();
-        }
-        return null;
+        var cap = getAuraContainer(itemStack);
+        return cap != null ? cap.getAuraColor() : null;
     }
 
     public Boolean isAcceptableType(ItemStack itemStack, String auraType) {
-        if (itemStack == null) return null;
-        var cap = itemStack.getCapability(NaturesAuraAPI.CAP_AURA_CONTAINER);
-        IAuraType IAuraType =  NaturesAuraAPI.AURA_TYPES.get(new ResourceLocation(auraType));
-        if (cap.isPresent() && IAuraType != null) {
-            return cap.resolve().get().isAcceptableType(IAuraType);
+        var cap = getAuraContainer(itemStack);
+        if (cap != null) {
+            IAuraType auraTypeObj = NaturesAuraAPI.AURA_TYPES.get(ResourceLocation.parse(auraType));
+            if (auraTypeObj != null) {
+                return cap.isAcceptableType(auraTypeObj);
+            }
         }
         return null;
     }
 
     public void storeAura(ItemStack itemStack, Integer aura, Boolean simulate) {
-        if (itemStack == null) return;
-        var cap = itemStack.getCapability(NaturesAuraAPI.CAP_AURA_CONTAINER);
-        if (cap.isPresent()) {
-            cap.resolve().get().storeAura(aura, simulate);
+        var cap = getAuraContainer(itemStack);
+        if (cap != null) {
+            cap.storeAura(aura, simulate);
         }
     }
 
     public void drainAura(ItemStack itemStack, Integer aura, Boolean simulate) {
-        if (itemStack == null) return;
-        var cap = itemStack.getCapability(NaturesAuraAPI.CAP_AURA_CONTAINER);
-        if (cap.isPresent()) {
-            cap.resolve().get().drainAura(aura, simulate);
+        var cap = getAuraContainer(itemStack);
+        if (cap != null) {
+            cap.drainAura(aura, simulate);
         }
     }
 }

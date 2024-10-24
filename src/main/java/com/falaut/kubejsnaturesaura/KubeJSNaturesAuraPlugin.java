@@ -4,36 +4,41 @@ import com.falaut.kubejsnaturesaura.utils.*;
 import com.falaut.kubejsnaturesaura.custom.*;
 import com.falaut.kubejsnaturesaura.schema.*;
 import com.falaut.kubejsnaturesaura.event.NaturesAuraEventJS;
-import dev.latvian.mods.kubejs.KubeJSPlugin;
+import dev.latvian.mods.kubejs.event.EventGroupRegistry;
+import dev.latvian.mods.kubejs.plugin.KubeJSPlugin;
 import dev.latvian.mods.kubejs.event.EventGroup;
 import dev.latvian.mods.kubejs.event.EventHandler;
-import dev.latvian.mods.kubejs.registry.RegistryInfo;
-import dev.latvian.mods.kubejs.script.BindingsEvent;
-import dev.latvian.mods.kubejs.recipe.schema.RegisterRecipeSchemasEvent;
+import dev.latvian.mods.kubejs.registry.BuilderTypeRegistry;
+import dev.latvian.mods.kubejs.script.BindingRegistry;
+import dev.latvian.mods.kubejs.recipe.schema.RecipeSchemaRegistry;
+import net.minecraft.core.registries.Registries;
 
-public class KubeJSNaturesAuraPlugin extends KubeJSPlugin {
+public class KubeJSNaturesAuraPlugin implements KubeJSPlugin {
 
     @Override
-    public void init() {
-        RegistryInfo.ITEM.addType("naturesaura:aura_cache", AuraCacheItemBuilder.class, AuraCacheItemBuilder::new);
-        RegistryInfo.ITEM.addType("naturesaura:structure_finder", StructureFinderItemBuilder.class, StructureFinderItemBuilder::new);
+    public void registerBuilderTypes(BuilderTypeRegistry registry) {
+        registry.of(Registries.ITEM, reg -> {
+            reg.add("naturesaura:aura_cache", AuraCacheItemBuilder.class, AuraCacheItemBuilder::new);
+            reg.add("naturesaura:structure_finder", StructureFinderItemBuilder.class, StructureFinderItemBuilder::new);
+        });
     }
+
     public static EventGroup GROUP = EventGroup.of("NaturesAuraEvents");
     public static EventHandler INIT = GROUP.startup("init", () -> NaturesAuraEventJS.class);
 
     @Override
-    public void registerEvents() {
-        GROUP.register();
+    public void registerEvents(EventGroupRegistry registry) {
+        registry.register(GROUP);
     }
 
-    public void registerBindings(BindingsEvent event) {
+    public void registerBindings(BindingRegistry event) {
         event.add("AuraBlock", new AuraBlockUtils());
         event.add("AuraItem", new AuraItemUtils());
         event.add("AuraChunk", new AuraChunkUtils());
     }
 
     @Override
-    public void registerRecipeSchemas(RegisterRecipeSchemasEvent event) {
+    public void registerRecipeSchemas(RecipeSchemaRegistry event) {
         event.namespace("naturesaura")
                 .register("altar", NaturalAltarSchema.SCHEMA)
                 .register("animal_spawner", AnimalSpawnerSchema.SCHEMA)
