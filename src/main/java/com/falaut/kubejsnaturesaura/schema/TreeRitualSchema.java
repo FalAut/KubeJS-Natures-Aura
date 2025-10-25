@@ -13,7 +13,7 @@ import java.util.List;
 public interface TreeRitualSchema {
 
     RecipeKey<ItemStack> OUTPUT =  ItemStackComponent.ITEM_STACK.outputKey("output");
-    RecipeKey<List<Ingredient>> INGREDIENTS = IngredientComponent.INGREDIENT.asList().inputKey("ingredients");
+    RecipeKey<List<Ingredient>> INGREDIENTS = IngredientComponent.INGREDIENT.instance().asList().inputKey("ingredients");
     RecipeKey<Ingredient> SAPLING = IngredientComponent.INGREDIENT.inputKey("sapling").optional(Ingredient.of(Items.OAK_SAPLING)).alwaysWrite();
     RecipeKey<Integer> TIME = NumberComponent.INT.key("time",ComponentRole.OTHER).optional(200).alwaysWrite();
 
