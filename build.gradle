@@ -65,8 +65,18 @@ configurations {
 
 repositories {
     maven {
-        name = "Lat's Maven (Rhino, KubeJS)"
-        url = "https://maven.saps.dev/minecraft"
+        url "https://maven.latvian.dev/releases"
+        content {
+            includeGroup "dev.latvian.mods"
+            includeGroup "dev.latvian.apps"
+        }
+    }
+
+    maven {
+        url 'https://jitpack.io'
+        content {
+            includeGroup "com.github.rtyley"
+        }
     }
 
     maven {
@@ -83,6 +93,8 @@ dependencies {
 
     /* Nature's Aura Dependencies */
     implementation "curse.maven:natures-aura-306626:5827043"
+
+    implementation "curse.maven:jei-238222:7129287"
 }
 
 processResources {

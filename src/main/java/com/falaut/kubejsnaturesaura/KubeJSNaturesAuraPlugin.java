@@ -12,14 +12,15 @@ import dev.latvian.mods.kubejs.registry.BuilderTypeRegistry;
 import dev.latvian.mods.kubejs.script.BindingRegistry;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchemaRegistry;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 
 public class KubeJSNaturesAuraPlugin implements KubeJSPlugin {
 
     @Override
     public void registerBuilderTypes(BuilderTypeRegistry registry) {
         registry.of(Registries.ITEM, reg -> {
-            reg.add("naturesaura:aura_cache", AuraCacheItemBuilder.class, AuraCacheItemBuilder::new);
-            reg.add("naturesaura:structure_finder", StructureFinderItemBuilder.class, StructureFinderItemBuilder::new);
+            reg.add(ResourceLocation.fromNamespaceAndPath("naturesaura", "aura_cache"), AuraCacheItemBuilder.class, AuraCacheItemBuilder::new);
+            reg.add(ResourceLocation.fromNamespaceAndPath("naturesaura", "structure_finder"), StructureFinderItemBuilder.class, StructureFinderItemBuilder::new);
         });
     }
 

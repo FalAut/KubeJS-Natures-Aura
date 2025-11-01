@@ -9,8 +9,8 @@ import java.util.List;
 
 public interface AnimalSpawnerSchema {
 
-    RecipeKey<String> ENTITY = StringComponent.NON_BLANK.outputKey("entity");
-    RecipeKey<List<Ingredient>> INGREDIENTS = IngredientComponent.INGREDIENT.asList().inputKey("ingredients");
+    RecipeKey<String> ENTITY = StringComponent.STRING.outputKey("entity");
+    RecipeKey<List<Ingredient>> INGREDIENTS = IngredientComponent.INGREDIENT.instance().asList().inputKey("ingredients");
     RecipeKey<Integer> AURA = NumberComponent.INT.otherKey("aura").optional(10000).alwaysWrite();
     RecipeKey<Integer> TIME = NumberComponent.INT.otherKey("time").optional(120).alwaysWrite();
 
