@@ -10,6 +10,7 @@ import dev.latvian.mods.kubejs.event.EventHandler;
 import dev.latvian.mods.kubejs.registry.RegistryInfo;
 import dev.latvian.mods.kubejs.script.BindingsEvent;
 import dev.latvian.mods.kubejs.recipe.schema.RegisterRecipeSchemasEvent;
+import dev.latvian.mods.kubejs.script.ScriptType;
 
 public class KubeJSNaturesAuraPlugin extends KubeJSPlugin {
 
@@ -24,6 +25,11 @@ public class KubeJSNaturesAuraPlugin extends KubeJSPlugin {
     @Override
     public void registerEvents() {
         GROUP.register();
+    }
+
+    @Override
+    public void afterInit() {
+        INIT.post(ScriptType.STARTUP, NaturesAuraEventJS.INSTANCE);
     }
 
     public void registerBindings(BindingsEvent event) {
