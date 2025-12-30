@@ -11,6 +11,7 @@ import dev.latvian.mods.kubejs.event.EventHandler;
 import dev.latvian.mods.kubejs.registry.BuilderTypeRegistry;
 import dev.latvian.mods.kubejs.script.BindingRegistry;
 import dev.latvian.mods.kubejs.recipe.schema.RecipeSchemaRegistry;
+import dev.latvian.mods.kubejs.script.ScriptType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 
@@ -30,6 +31,11 @@ public class KubeJSNaturesAuraPlugin implements KubeJSPlugin {
     @Override
     public void registerEvents(EventGroupRegistry registry) {
         registry.register(GROUP);
+    }
+
+    @Override
+    public void afterInit() {
+        INIT.post(ScriptType.STARTUP, NaturesAuraEventJS.INSTANCE);
     }
 
     public void registerBindings(BindingRegistry event) {
